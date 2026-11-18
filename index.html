@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="David — Website Designer & Developer. Professional websites for businesses that don't have one yet. Request your website today." />
+    <link rel="icon" href="data:," />
+    <title>Web Design by David — Website Designer &amp; Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #050807;
+        --bg-2: #0a0f0c;
+        --panel: #0d130f;
+        --panel-2: #111813;
+        --line: #1d2a20;
+        --line-soft: #16211a;
+        --green: #2ee56f;
+        --green-bright: #57ff96;
+        --green-dim: #1a9e4b;
+        --green-ghost: rgba(46, 229, 111, 0.1);
+        --text: #eef5ef;
+        --muted: #9db3a4;
+        --muted-2: #6f8577;
+        --radius: 14px;
+        --font-display: "Bricolage Grotesque", "Manrope", sans-serif;
+        --font-body: "Manrope", system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", ui-monospace, monospace;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      ::selection { background: var(--green); color: #04140a; }
+      a { color: inherit; }
+      img, svg { display: block; }
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2.25rem; }
+
+      .wrap { max-width: 1160px; margin: 0 auto; padding: 0 22px; }
+
+      /* ---------- Header ---------- */
+      header {
+        position: sticky; top: 0; z-index: 50;
+        background: rgba(5, 8, 7, 0.86);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--line-soft);
+      }
+      .nav { display: flex; align-items: center; gap: 18px; height: 74px; }
+      .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; margin-right: auto; }
+      .brand-mark {
+        width: 44px; height: 44px; flex: none;
+        display: grid; place-items: center;
+        background: var(--green); color: #04140a;
+        font-family: var(--font-mono); font-weight: 700; font-size: 23px; letter-spacing: -0.05em;
+        border-radius: 13px 13px 3px 13px;
+        box-shadow: 4px 4px 0 rgba(46, 229, 111, 0.28);
+        transform: rotate(-4deg);
+      }
+      .brand-text { line-height: 1; display: grid; gap: 5px; }
+      .brand-text strong { font-family: var(--font-display); font-weight: 800; font-size: 23px; letter-spacing: -0.03em; display: block; text-transform: lowercase; white-space: nowrap; }
+      .brand-dot { color: var(--green); }
+      .brand-cursor { color: var(--green); font-family: var(--font-mono); font-weight: 600; font-size: 20px; animation: brand-blink 1.1s steps(1) infinite; }
+      @keyframes brand-blink { 0%, 60% { opacity: 1; } 61%, 100% { opacity: 0; } }
+      .brand-text > span { font-family: var(--font-mono); font-size: 10.5px; color: var(--green-bright); font-weight: 600; letter-spacing: 0.22em; white-space: nowrap; text-transform: uppercase; }
+      @media (prefers-reduced-motion: reduce) { .brand-cursor { animation: none; } .brand-mark { transform: none; } }
+      @media (max-width: 420px) { .brand-text > span { letter-spacing: 0.14em; } .brand-text strong { font-size: 20px; } .brand-mark { width: 40px; height: 40px; font-size: 21px; } }
+      .nav-links { display: flex; align-items: center; gap: 4px; }
+      .nav-links a {
+        text-decoration: none; font-weight: 600; font-size: 14.5px; color: var(--muted);
+        padding: 10px 13px; border-radius: 9px;
+      }
+      .nav-links a:hover { color: var(--text); background: var(--panel-2); }
+      .nav-links a.btn-green { color: #04140a; }
+      .nav-links a.btn-green:hover { color: #04140a; background: var(--green-bright); }
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+        font-family: var(--font-body); font-weight: 800; font-size: 15px;
+        text-decoration: none; cursor: pointer; border: 0;
+        padding: 12px 22px; border-radius: 11px; min-height: 48px; white-space: nowrap;
+        transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+      }
+      .btn:active { transform: translateY(1px); }
+      .btn-green { background: var(--green); color: #04140a; }
+      .btn-green:hover { background: var(--green-bright); }
+      .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+      .btn-ghost:hover { border-color: var(--green-dim); color: var(--green-bright); }
+      .btn-sm { padding: 9px 17px; min-height: 42px; font-size: 14px; }
+      @media (max-width: 760px) { .nav-links a:not(.btn) { display: none; } }
+
+      /* ---------- Hero ---------- */
+      .hero { position: relative; padding: 84px 0 88px; border-bottom: 1px solid var(--line-soft); }
+      .hero-inner { position: relative; max-width: 820px; }
+      .hero-tag {
+        display: inline-flex; align-items: center; gap: 9px;
+        font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; letter-spacing: 0.06em;
+        color: var(--green-bright); background: var(--green-ghost);
+        border: 1px solid rgba(46, 229, 111, 0.35);
+        padding: 7px 13px; border-radius: 999px; margin-bottom: 24px;
+      }
+      .hero-tag .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(46, 229, 111, 0.18); }
+      h1 {
+        font-family: var(--font-display); font-weight: 800;
+        font-size: clamp(40px, 5.6vw, 64px); line-height: 1.04; letter-spacing: -0.015em;
+        margin: 0 0 20px;
+      }
+      h1 .hl { color: var(--green); }
+      .hero-sub { font-size: 18.5px; color: var(--muted); max-width: 34em; margin: 0 0 32px; }
+      .hero-sub strong { color: var(--text); font-weight: 700; }
+      .hero-ctas { display: flex; flex-wrap: wrap; gap: 13px; margin-bottom: 38px; }
+      .hero-points { display: flex; flex-wrap: wrap; gap: 10px 26px; list-style: none; margin: 0; padding: 0; }
+      .hero-points li { display: flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 600; color: var(--muted); }
+      .hero-points svg { flex: none; }
+
+      @media (max-width: 640px) {
+        .hero { padding: 60px 0 64px; }
+        .hero-sub { font-size: 17px; }
+      }
+
+      /* ---------- Sections ---------- */
+      section { padding: 84px 0; }
+      section.alt { background: var(--bg-2); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+      .sec-head { max-width: 640px; margin-bottom: 46px; }
+      .sec-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+      .sec-label {
+        font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em;
+        color: var(--green); text-transform: uppercase; margin: 0 0 14px;
+        display: flex; align-items: center; gap: 10px;
+      }
+      .sec-head.center .sec-label { justify-content: center; }
+      .sec-label::before { content: ""; width: 26px; height: 2px; background: var(--green); }
+      .sec-head.center .sec-label::after { content: ""; width: 26px; height: 2px; background: var(--green); }
+      h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(29px, 3.6vw, 40px); line-height: 1.12; letter-spacing: -0.01em; margin: 0 0 14px; }
+      .sec-head p { color: var(--muted); font-size: 17px; margin: 0; }
+
+      /* Services */
+      .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      @media (max-width: 920px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 600px) { .svc-grid { grid-template-columns: 1fr; } }
+      .svc {
+        background: var(--panel); border: 1px solid var(--line-soft); border-radius: var(--radius);
+        padding: 28px 26px;
+      }
+      .svc:hover { border-color: var(--green-dim); }
+      .svc-icon {
+        width: 48px; height: 48px; border-radius: 12px; margin-bottom: 18px;
+        background: var(--green-ghost); border: 1px solid rgba(46, 229, 111, 0.3);
+        display: grid; place-items: center;
+      }
+      .svc h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin: 0 0 9px; }
+      .svc p { color: var(--muted); font-size: 15px; margin: 0; }
+
+      /* Included strip */
+      .incl { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 46px; }
+      @media (max-width: 920px) { .incl { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 480px) { .incl { grid-template-columns: 1fr; } }
+      .incl-item {
+        display: flex; gap: 12px; align-items: flex-start;
+        background: var(--panel); border: 1px solid var(--line-soft); border-radius: 12px; padding: 17px 18px;
+      }
+      .incl-item svg { flex: none; margin-top: 2px; }
+      .incl-item strong { display: block; font-size: 15px; }
+      .incl-item span { font-size: 13.5px; color: var(--muted); }
+
+      /* Process */
+      .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: step; }
+      @media (max-width: 920px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+      .step { position: relative; padding: 26px 24px; border: 1px solid var(--line-soft); border-radius: var(--radius); background: var(--panel); }
+      .step-num {
+        font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: #04140a;
+        background: var(--green); border-radius: 8px; padding: 4px 10px; display: inline-block; margin-bottom: 16px;
+      }
+      .step h3 { font-family: var(--font-display); font-size: 19px; font-weight: 700; margin: 0 0 8px; }
+      .step p { color: var(--muted); font-size: 14.5px; margin: 0; }
+
+      /* Who it's for */
+      .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+      @media (max-width: 760px) { .who-grid { grid-template-columns: 1fr; } }
+      .who {
+        border-radius: var(--radius); padding: 30px 28px; border: 1px solid var(--line-soft); background: var(--panel);
+      }
+      .who h3 { font-family: var(--font-display); font-size: 21px; margin: 0 0 16px; display: flex; align-items: center; gap: 11px; }
+      .who ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }
+      .who li { display: flex; gap: 10px; color: var(--muted); font-size: 15.5px; }
+      .who li svg { flex: none; margin-top: 3px; }
+      .who li strong { color: var(--text); }
+
+      /* ---------- Request form ---------- */
+      .request-shell {
+        display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 0;
+        border: 1px solid var(--line); border-radius: 20px; overflow: hidden; background: var(--panel);
+      }
+      @media (max-width: 880px) { .request-shell { grid-template-columns: 1fr; } }
+      .request-side {
+        background: linear-gradient(160deg, #0c1a10 0%, #071009 100%);
+        border-right: 1px solid var(--line-soft);
+        padding: 40px 36px; display: flex; flex-direction: column; gap: 26px;
+      }
+      @media (max-width: 880px) { .request-side { border-right: 0; border-bottom: 1px solid var(--line-soft); } }
+      .request-side h2 { font-size: 30px; margin-bottom: 10px; }
+      .request-side > div > p { color: var(--muted); margin: 0; font-size: 16px; }
+      .side-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+      .side-list li { display: flex; gap: 11px; font-size: 15px; color: var(--muted); }
+      .side-list li svg { flex: none; margin-top: 3px; }
+      .side-list strong { color: var(--text); }
+      .side-contact { margin-top: auto; border-top: 1px solid var(--line-soft); padding-top: 22px; display: grid; gap: 10px; }
+      .side-contact a {
+        display: flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 700; font-size: 15px;
+        padding: 12px 14px; border: 1px solid var(--line); border-radius: 11px; background: rgba(5, 8, 7, 0.5);
+      }
+      .side-contact a:hover { border-color: var(--green-dim); color: var(--green-bright); }
+      .side-contact small { color: var(--muted-2); font-weight: 600; display: block; font-size: 12px; }
+
+      form { padding: 40px 36px; }
+      @media (max-width: 560px) { form, .request-side { padding: 30px 22px; } }
+      .f-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      @media (max-width: 560px) { .f-grid { grid-template-columns: 1fr; } }
+      .field { display: grid; gap: 7px; }
+      .field.full { grid-column: 1 / -1; }
+      label { font-size: 13.5px; font-weight: 700; letter-spacing: 0.02em; }
+      label .req { color: var(--green); }
+      label .opt { color: var(--muted-2); font-weight: 600; }
+      input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+        width: 100%; background: var(--bg-2); color: var(--text);
+        border: 1px solid var(--line); border-radius: 10px;
+        font-family: var(--font-body); font-size: 15.5px; padding: 12px 14px; min-height: 48px;
+      }
+      textarea { min-height: 108px; resize: vertical; line-height: 1.55; }
+      input:focus, select:focus, textarea:focus { outline: 2px solid var(--green); outline-offset: 1px; border-color: var(--green-dim); }
+      input::placeholder, textarea::placeholder { color: var(--muted-2); }
+      select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%232ee56f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; }
+      .chips { display: flex; flex-wrap: wrap; gap: 9px; }
+      .chip {
+        font-family: var(--font-body); font-size: 14px; font-weight: 600; cursor: pointer;
+        background: var(--bg-2); color: var(--muted); border: 1px solid var(--line);
+        border-radius: 999px; padding: 9px 15px; min-height: 40px;
+        transition: all 0.12s ease;
+      }
+      .chip:hover { border-color: var(--green-dim); color: var(--text); }
+      .chip.on { background: var(--green); border-color: var(--green); color: #04140a; font-weight: 800; }
+      .form-note { font-size: 13.5px; color: var(--muted-2); margin: 18px 0 0; }
+      .form-error {
+        display: none; margin-top: 16px; padding: 12px 15px; border-radius: 10px;
+        background: rgba(255, 92, 92, 0.1); border: 1px solid rgba(255, 92, 92, 0.45);
+        color: #ffb3b3; font-size: 14.5px; font-weight: 600;
+      }
+      .form-error.show { display: block; }
+      .send-panel { display: none; margin-top: 22px; border: 1px solid rgba(46, 229, 111, 0.4); background: var(--green-ghost); border-radius: 14px; padding: 22px; }
+      .send-panel.show { display: block; }
+      .send-panel h3 { font-family: var(--font-display); margin: 0 0 6px; font-size: 19px; display: flex; gap: 10px; align-items: center; }
+      .send-panel p { color: var(--muted); font-size: 14.5px; margin: 0 0 16px; }
+      .send-actions { display: flex; flex-wrap: wrap; gap: 11px; }
+      .send-actions .btn { flex: 1 1 180px; }
+      .preview-box {
+        margin-top: 16px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px;
+        padding: 14px 16px; font-family: var(--font-mono); font-size: 12.8px; line-height: 1.65;
+        color: var(--muted); white-space: pre-wrap; word-break: break-word; max-height: 220px; overflow: auto;
+      }
+
+      /* FAQ */
+      .faq { max-width: 780px; margin: 0 auto; display: grid; gap: 12px; }
+      details {
+        background: var(--panel); border: 1px solid var(--line-soft); border-radius: 12px; padding: 4px 22px;
+      }
+      details[open ] { border-color: var(--green-dim); }
+      summary {
+        cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 17px;
+        padding: 16px 0; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 14px;
+      }
+      summary::-webkit-details-marker { display: none; }
+      summary .plus { color: var(--green); font-size: 22px; font-weight: 400; line-height: 1; flex: none; }
+      details p { color: var(--muted); margin: 0 0 18px; font-size: 15.5px; }
+
+      /* Final CTA + footer */
+      .cta-band {
+        border: 1px solid rgba(46, 229, 111, 0.35); border-radius: 20px;
+        background: linear-gradient(150deg, #0d1f12 0%, #060b07 70%);
+        padding: 52px 34px; text-align: center;
+      }
+      .cta-band h2 { margin-bottom: 12px; }
+      .cta-band p { color: var(--muted); max-width: 36em; margin: 0 auto 28px; font-size: 17px; }
+      footer { border-top: 1px solid var(--line-soft); padding: 40px 0 46px; }
+      .foot { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; }
+      .foot-links { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+      .foot-links a { color: var(--muted); text-decoration: none; font-weight: 600; font-size: 14.5px; padding: 8px 2px; }
+      .foot-links a:hover { color: var(--green-bright); }
+      .foot small { color: var(--muted-2); font-size: 13px; width: 100%; }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        * { transition: none !important; }
+      }
+
+      /* ---------- Phone layout (mobile-first polish) ----------
+         On phones the page switches to a true phone layout: compact
+         header, stacked full-width buttons, single-column cards,
+         thumb-size form fields and a sticky bottom action bar.
+         On tablets/laptops (above 820px) none of this applies and
+         the wide multi-column desktop layout is used instead. */
+      html { -webkit-text-size-adjust: 100%; }
+      * { -webkit-tap-highlight-color: transparent; }
+      .mobile-cta { display: none; }
+      @media (max-width: 820px) {
+        body { padding-bottom: 76px; }
+        .wrap { padding: 0 18px; }
+        .nav { height: 64px; gap: 10px; }
+        .nav-links a.btn-sm { padding: 9px 14px; min-height: 44px; font-size: 13.5px; border-radius: 10px; }
+        section { padding: 58px 0; }
+        .sec-head { margin-bottom: 32px; }
+        .sec-head p { font-size: 16px; }
+        h2 { font-size: 28px; }
+        .hero { padding: 42px 0 52px; }
+        h1 { font-size: clamp(35px, 10vw, 44px); line-height: 1.08; margin-bottom: 16px; }
+        .hero-tag { font-size: 11.5px; padding: 6px 11px; margin-bottom: 20px; }
+        .hero-sub { font-size: 16.5px; margin-bottom: 26px; }
+        .hero-ctas { flex-direction: column; flex-wrap: nowrap; gap: 11px; margin-bottom: 28px; }
+        .hero-ctas .btn { width: 100%; min-height: 54px; font-size: 16px; }
+        .hero-points { flex-direction: column; flex-wrap: nowrap; gap: 10px; }
+        .hero-points li { font-size: 15px; }
+        .svc { padding: 24px 20px; }
+        .svc-icon { width: 44px; height: 44px; margin-bottom: 14px; }
+        .incl { grid-template-columns: 1fr; margin-top: 32px; }
+        .step, .who { padding: 24px 20px; }
+        .who h3 { font-size: 19px; }
+        .request-shell { border-radius: 16px; }
+        form, .request-side { padding: 28px 20px; }
+        .request-side h2 { font-size: 27px; }
+        input[type="text"], input[type="email"], input[type="tel"], select, textarea { font-size: 16px; min-height: 52px; }
+        .chip { min-height: 44px; padding: 10px 16px; font-size: 14.5px; }
+        form button[type="submit"] { min-height: 54px; font-size: 16px; }
+        .send-actions { flex-direction: column; flex-wrap: nowrap; }
+        .send-actions .btn { flex: none; width: 100%; min-height: 52px; }
+        details { padding: 2px 18px; }
+        summary { font-size: 16px; padding: 15px 0; min-height: 52px; }
+        .cta-band { padding: 38px 20px; border-radius: 16px; }
+        .cta-band p { font-size: 16px; margin-bottom: 24px; }
+        .cta-band .btn { width: 100%; min-height: 54px; font-size: 16px; }
+        footer { padding: 34px 0 42px; }
+        .foot { flex-direction: column; align-items: flex-start; gap: 16px; }
+        .foot-links { gap: 4px 18px; }
+        .mobile-cta {
+          display: flex; gap: 10px;
+          position: fixed; left: 0; right: 0; bottom: 0; z-index: 80;
+          padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+          background: rgba(5, 8, 7, 0.94);
+          backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+          border-top: 1px solid var(--line);
+          transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+        .mobile-cta.hide { transform: translateY(110%); opacity: 0; pointer-events: none; }
+        .mobile-cta .btn { flex: 1 1 0; min-height: 52px; padding: 12px 8px; font-size: 15px; }
+      }
+      @media (max-width: 380px) {
+        .brand-text strong { font-size: 19px; }
+        .brand-mark { width: 38px; height: 38px; font-size: 20px; }
+        .nav-links a.btn-sm { font-size: 12.5px; padding: 8px 11px; }
+        .mobile-cta .btn { font-size: 14px; }
+      }
+      @media (prefers-reduced-motion: reduce) { .mobile-cta { transition: none; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap nav">
+        <a class="brand" href="#top" aria-label="David — Web Designer, home">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span class="brand-text">
+            <strong>david<span class="brand-dot">.</span><span class="brand-cursor" aria-hidden="true">_</span></strong>
+            <span>— Web Designer</span>
+          </span>
+        </a>
+        <nav class="nav-links" aria-label="Main">
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
+          <a href="#faq">FAQ</a>
+          <a href="https://www.instagram.com/webdesignbydavid/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn btn-green btn-sm" href="#request">Request a Website</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <div class="hero">
+        <div class="wrap hero-inner">
+          <div>
+            <p class="hero-tag"><span class="dot"></span> NOW TAKING NEW PROJECTS</p>
+            <h1>Your business needs a website. <span class="hl">I&rsquo;ll build it.</span></h1>
+            <p class="hero-sub">I&rsquo;m David, a website designer &amp; developer. I build clean, fast, professional websites for businesses that don&rsquo;t have one yet — so your customers can find you, trust you, and contact you in one tap.</p>
+            <div class="hero-ctas">
+              <a class="btn btn-green" href="#request">Request Your Website
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+              <a class="btn btn-ghost" href="https://www.instagram.com/webdesignbydavid/" target="_blank" rel="noopener">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                DM &ldquo;WEB&rdquo; on Instagram
+              </a>
+            </div>
+            <ul class="hero-points">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> See a demo before you pay</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Mobile-first design</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> No tech skills needed from you</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SERVICES -->
+      <section id="services">
+        <div class="wrap">
+          <div class="sec-head">
+            <p class="sec-label">Services</p>
+            <h2>Websites built for real businesses</h2>
+            <p>Whether you run a shop, a service, or a studio — if customers search for you online and find nothing, you&rsquo;re losing them. Here&rsquo;s what I can build for you.</p>
+          </div>
+          <div class="svc-grid">
+            <article class="svc">
+              <div class="svc-icon"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg></div>
+              <h3>Business Websites</h3>
+              <p>A complete online home for your business — who you are, what you offer, where to find you, and how to reach you. The essentials, done professionally.</p>
+            </article>
+            <article class="svc">
+              <div class="svc-icon"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 8.5 4.7v10.6L12 22l-8.5-4.7V6.7L12 2z" opacity="0"/><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg></div>
+              <h3>Landing Pages</h3>
+              <p>One sharp page with a single goal — bookings, calls, sign-ups, or sales. Perfect for ads, launches, and Instagram bio links.</p>
+            </article>
+            <article class="svc">
+              <div class="svc-icon"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="12" x="3" y="6" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></div>
+              <h3>Portfolio &amp; Gallery Sites</h3>
+              <p>Show your work the way it deserves — photo galleries and project pages that turn visitors into enquiries.</p>
+            </article>
+            <article class="svc">
+              <div class="svc-icon"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+              <h3>Booking &amp; Enquiry Sites</h3>
+              <p>Contact forms, click-to-call, WhatsApp buttons and booking requests — built in, so customers can reach you the second they&rsquo;re ready.</p>
+            </article>
+            <article class="svc">
+              <div class="svc-icon"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
+              <h3>Online Stores</h3>
+              <p>Sell products online with product pages, a clean catalogue, and a checkout-ready setup that&rsquo;s simple to manage.</p>
+            </article>
+            <article class="svc">
+              <div class="svc-icon"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg></div>
+              <h3>Website Redesign</h3>
+              <p>Already have a site that looks dated or doesn&rsquo;t work on phones? I&rsquo;ll rebuild it modern, fast, and mobile-friendly.</p>
+            </article>
+          </div>
+
+          <div class="incl">
+            <div class="incl-item">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <div><strong>Mobile-first</strong><span>Looks perfect on phones, where most customers find you.</span></div>
+            </div>
+            <div class="incl-item">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <div><strong>Fast loading</strong><span>Lightweight pages that open quickly and keep visitors around.</span></div>
+            </div>
+            <div class="incl-item">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <div><strong>Easy contact</strong><span>Forms, call and WhatsApp buttons placed where they convert.</span></div>
+            </div>
+            <div class="incl-item">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <div><strong>Search-ready basics</strong><span>Proper titles and structure so Google can find and show your site.</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHO IT'S FOR -->
+      <section class="alt">
+        <div class="wrap">
+          <div class="sec-head">
+            <p class="sec-label">Who this is for</p>
+            <h2>No website yet? You&rsquo;re exactly who I build for.</h2>
+            <p>Most of my work starts with a business that runs on word of mouth and social media alone. A website changes that.</p>
+          </div>
+          <div class="who-grid">
+            <div class="who">
+              <h3><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 4.5 3h15L21 9.5"/><path d="M4 9.5V21h16V9.5"/><path d="M9 21v-6h6v6"/></svg> Local businesses &amp; shops</h3>
+              <ul>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Customers Google you and find <strong>nothing</strong> — or worse, a competitor.</span></li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Your services, prices and timings deserve <strong>one clear page</strong>, not scattered posts.</span></li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Enquiries should come to you — <strong>calls, forms and WhatsApp</strong> — not get lost in DMs.</span></li>
+              </ul>
+            </div>
+            <div class="who">
+              <h3><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg> Creators, freelancers &amp; services</h3>
+              <ul>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>A portfolio site makes you look <strong>established and trustworthy</strong> to new clients.</span></li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>One link for your bio that holds <strong>everything</strong> — work, services, contact.</span></li>
+                <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Booking and enquiry forms that <strong>filter serious clients</strong> from casual chats.</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROCESS -->
+      <section id="process">
+        <div class="wrap">
+          <div class="sec-head">
+            <p class="sec-label">How it works</p>
+            <h2>From first message to live website</h2>
+            <p>Simple, transparent, and no payment talk until you&rsquo;ve seen your website and approved it.</p>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <span class="step-num">STEP 01</span>
+              <h3>Tell me about your business</h3>
+              <p>Fill the request form below or DM me &ldquo;WEB&rdquo; on Instagram. A few quick questions about your business, pages and style.</p>
+            </div>
+            <div class="step">
+              <span class="step-num">STEP 02</span>
+              <h3>I build your demo</h3>
+              <p>I design and build your website from your answers, and send you a private demo link to open on your phone or computer.</p>
+            </div>
+            <div class="step">
+              <span class="step-num">STEP 03</span>
+              <h3>You review &amp; approve</h3>
+              <p>Look it over, tell me what to change. We refine it until it feels like your business. Only then do we talk payment.</p>
+            </div>
+            <div class="step">
+              <span class="step-num">STEP 04</span>
+              <h3>Your site goes live</h3>
+              <p>Your website launches on your own domain, ready to share everywhere — bio, cards, Google, and with every customer.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- REQUEST FORM -->
+      <section class="alt" id="request">
+        <div class="wrap">
+          <div class="request-shell">
+            <div class="request-side">
+              <div>
+                <p class="sec-label">Start a project</p>
+                <h2>Request your website</h2>
+                <p>Two minutes to fill. Your answers become a ready-made request you send me by email or Instagram DM — no account, no sign-up.</p>
+              </div>
+              <ul class="side-list">
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Demo first.</strong> You see your website before any payment discussion.</span></li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><strong>No jargon.</strong> Plain questions, plain answers — I handle the technical side.</span></li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Honest scope.</strong> Price depends on pages and features — tell me what you need and I&rsquo;ll quote it straight.</span></li>
+              </ul>
+              <div class="side-contact">
+                <a href="https://www.instagram.com/webdesignbydavid/" target="_blank" rel="noopener">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                  <span>@webdesignbydavid<small>Instagram — DM &ldquo;WEB&rdquo; to start</small></span>
+                </a>
+                <a href="mailto:expert18v@gmail.com?subject=Website%20Request">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  <span>expert18v@gmail.com<small>Email — for detailed requests</small></span>
+                </a>
+              </div>
+            </div>
+
+            <form id="reqForm" novalidate>
+              <div class="f-grid">
+                <div class="field">
+                  <label for="fName">Your name <span class="req">*</span></label>
+                  <input type="text" id="fName" name="name" placeholder="e.g. Alex Carter" autocomplete="name" />
+                </div>
+                <div class="field">
+                  <label for="fBiz">Business name <span class="req">*</span></label>
+                  <input type="text" id="fBiz" name="business" placeholder="e.g. Carter Plumbing Co." autocomplete="organization" />
+                </div>
+                <div class="field">
+                  <label for="fContact">Your email or phone <span class="req">*</span></label>
+                  <input type="text" id="fContact" name="contact" placeholder="So I can reply to you" autocomplete="email" />
+                </div>
+                <div class="field">
+                  <label for="fType">Type of business</label>
+                  <select id="fType" name="biztype">
+                    <option value="">Select one…</option>
+                    <option>Shop / Retail</option>
+                    <option>Restaurant / Café / Food</option>
+                    <option>Salon / Beauty</option>
+                    <option>Trades / Home services</option>
+                    <option>Health / Fitness</option>
+                    <option>Professional services</option>
+                    <option>Creator / Freelancer</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="fSite">What kind of website?</label>
+                  <select id="fSite" name="sitetype">
+                    <option>Business website</option>
+                    <option>Landing page</option>
+                    <option>Portfolio / Gallery site</option>
+                    <option>Booking / Enquiry site</option>
+                    <option>Online store</option>
+                    <option>Redesign of my current site</option>
+                    <option>Not sure — advise me</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="fPages">Pages you need <span class="opt">(approx.)</span></label>
+                  <select id="fPages" name="pages">
+                    <option>Just 1 page</option>
+                    <option selected>3–5 pages (Home, About, Services, Contact…)</option>
+                    <option>6–10 pages</option>
+                    <option>More than 10 pages</option>
+                    <option>Not sure yet</option>
+                  </select>
+                </div>
+                <div class="field full">
+                  <label>Features you want <span class="opt">(tap to select)</span></label>
+                  <div class="chips" id="featureChips">
+                    <button type="button" class="chip">Contact form</button>
+                    <button type="button" class="chip">WhatsApp button</button>
+                    <button type="button" class="chip">Online booking</button>
+                    <button type="button" class="chip">Photo gallery</button>
+                    <button type="button" class="chip">Google Maps</button>
+                    <button type="button" class="chip">Online payments</button>
+                    <button type="button" class="chip">Blog / News</button>
+                    <button type="button" class="chip">Customer reviews</button>
+                  </div>
+                </div>
+                <div class="field full">
+                  <label for="fStyle">Colours or style you like <span class="opt">(optional)</span></label>
+                  <input type="text" id="fStyle" name="style" placeholder="e.g. Black &amp; gold, clean and minimal — or a site you like" />
+                </div>
+                <div class="field full">
+                  <label for="fDetails">Anything else about your project? <span class="opt">(optional)</span></label>
+                  <textarea id="fDetails" name="details" placeholder="Tell me about your business, what the website should do for you, and any deadline you have in mind."></textarea>
+                </div>
+              </div>
+
+              <p class="form-error" id="formError" role="alert"></p>
+
+              <div style="margin-top:24px">
+                <button type="submit" class="btn btn-green" style="width:100%">
+                  Prepare My Request
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+                <p class="form-note">This builds your request message on this page — then you send it to David yourself by email or Instagram DM. Nothing is sent automatically.</p>
+              </div>
+
+              <div class="send-panel" id="sendPanel" aria-live="polite">
+                <h3><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#2ee56f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Your request is ready — pick how to send it:</h3>
+                <p>Choose email for the full detailed request, or copy it into an Instagram DM.</p>
+                <div class="send-actions">
+                  <a class="btn btn-green" id="sendEmail" href="#">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    Send by Email
+                  </a>
+                  <button type="button" class="btn btn-ghost" id="copyBtn">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    Copy Request
+                  </button>
+                  <a class="btn btn-ghost" href="https://www.instagram.com/webdesignbydavid/" target="_blank" rel="noopener">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    Open Instagram DM
+                  </a>
+                </div>
+                <div class="preview-box" id="msgPreview"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq">
+        <div class="wrap">
+          <div class="sec-head center">
+            <p class="sec-label">Questions</p>
+            <h2>Before you ask</h2>
+          </div>
+          <div class="faq">
+            <details>
+              <summary>How much does a website cost? <span class="plus">+</span></summary>
+              <p>It depends on the number of pages and features you need — a one-page site and a full online store are very different jobs. Send a request with what you need and I&rsquo;ll give you a straight quote. You see a demo of your website before we finalise anything about payment.</p>
+            </details>
+            <details>
+              <summary>How long does it take? <span class="plus">+</span></summary>
+              <p>Once I have your answers and content, most standard business websites get their first demo within a few days. Bigger sites with stores or booking systems take longer — I&rsquo;ll give you a realistic timeline with your quote.</p>
+            </details>
+            <details>
+              <summary>What do you need from me? <span class="plus">+</span></summary>
+              <p>Just the basics: your business name, what you offer, your contact details, and any photos or a logo you already have. No photos yet? We can start with the structure and add visuals as we go — you don&rsquo;t need any technical knowledge.</p>
+            </details>
+            <details>
+              <summary>I already have a website. Can you fix it? <span class="plus">+</span></summary>
+              <p>Yes — redesigns are part of what I do. Pick &ldquo;Redesign of my current site&rdquo; in the request form and include your current site&rsquo;s address in the details, and I&rsquo;ll review it before quoting.</p>
+            </details>
+            <details>
+              <summary>How do we start? <span class="plus">+</span></summary>
+              <p>Fill the request form above and send it by email, or DM me the word &ldquo;WEB&rdquo; on Instagram at @webdesignbydavid. I&rsquo;ll reply with any follow-up questions, then build your demo.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- FINAL CTA -->
+      <section style="padding-top:0">
+        <div class="wrap">
+          <div class="cta-band">
+            <h2>Every day without a website<br />is customers you never meet.</h2>
+            <p>Your competitors are one search away. Let&rsquo;s put your business on the map — start with a free demo request today.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:13px;justify-content:center">
+              <a class="btn btn-green" href="#request">Request Your Website</a>
+              <a class="btn btn-ghost" href="https://www.instagram.com/webdesignbydavid/" target="_blank" rel="noopener">DM &ldquo;WEB&rdquo; on Instagram</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap foot">
+        <a class="brand" href="#top" style="margin-right:0" aria-label="David — Web Designer, home">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span class="brand-text">
+            <strong>david<span class="brand-dot">.</span><span class="brand-cursor" aria-hidden="true">_</span></strong>
+            <span>— Web Designer</span>
+          </span>
+        </a>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
+          <a href="#request">Request a Website</a>
+          <a href="https://www.instagram.com/webdesignbydavid/" target="_blank" rel="noopener">Instagram — @webdesignbydavid</a>
+          <a href="mailto:expert18v@gmail.com?subject=Website%20Request">expert18v@gmail.com</a>
+        </nav>
+        <small>© 2026 David — Website Designer &amp; Developer. Websites for businesses without one.</small>
+      </div>
+    </footer>
+
+    <div class="mobile-cta" id="mobileCta">
+      <a class="btn btn-green" href="#request">Request a Website</a>
+      <a class="btn btn-ghost" href="https://www.instagram.com/webdesignbydavid/" target="_blank" rel="noopener">DM &ldquo;WEB&rdquo;</a>
+    </div>
+
+    <script>
+      (function () {
+        var chips = document.querySelectorAll("#featureChips .chip");
+        chips.forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            chip.classList.toggle("on");
+          });
+        });
+
+        var form = document.getElementById("reqForm");
+        var errorBox = document.getElementById("formError");
+        var panel = document.getElementById("sendPanel");
+        var preview = document.getElementById("msgPreview");
+        var sendEmail = document.getElementById("sendEmail");
+        var currentMessage = "";
+
+        function val(id) {
+          return document.getElementById(id).value.trim();
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var name = val("fName");
+          var biz = val("fBiz");
+          var contact = val("fContact");
+
+          var missing = [];
+          if (!name) missing.push("your name");
+          if (!biz) missing.push("your business name");
+          if (!contact) missing.push("your email or phone");
+
+          if (missing.length) {
+            errorBox.textContent = "Please add " + missing.join(", ") + " so David can reply to your request.";
+            errorBox.classList.add("show");
+            panel.classList.remove("show");
+            errorBox.scrollIntoView({ behavior: "smooth", block: "center" });
+            return;
+          }
+          errorBox.classList.remove("show");
+
+          var features = [];
+          document.querySelectorAll("#featureChips .chip.on").forEach(function (c) {
+            features.push(c.textContent.trim());
+          });
+
+          var lines = [];
+          lines.push("NEW WEBSITE REQUEST");
+          lines.push("--------------------");
+          lines.push("Name: " + name);
+          lines.push("Business: " + biz);
+          lines.push("Reply to: " + contact);
+          var bizType = val("fType");
+          if (bizType) lines.push("Type of business: " + bizType);
+          lines.push("Website type: " + val("fSite"));
+          lines.push("Pages needed: " + val("fPages"));
+          if (features.length) lines.push("Features: " + features.join(", "));
+          var style = val("fStyle");
+          if (style) lines.push("Style / colours: " + style);
+          var details = val("fDetails");
+          if (details) {
+            lines.push("");
+            lines.push("About the project:");
+            lines.push(details);
+          }
+          lines.push("");
+          lines.push("Sent from the Web Design by David website.");
+
+          currentMessage = lines.join("\n");
+          preview.textContent = currentMessage;
+
+          var subject = "Website Request — " + biz;
+          sendEmail.href = "mailto:expert18v@gmail.com?subject=" +
+            encodeURIComponent(subject) + "&body=" + encodeURIComponent(currentMessage);
+
+          panel.classList.add("show");
+          panel.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+
+        // Sticky phone action bar: hide it while the request form or
+        // footer is on screen so it never covers the form's own buttons.
+        var mobileCta = document.getElementById("mobileCta");
+        if (mobileCta && "IntersectionObserver" in window) {
+          var barBlockers = new Set();
+          var barObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) barBlockers.add(entry.target);
+              else barBlockers.delete(entry.target);
+            });
+            mobileCta.classList.toggle("hide", barBlockers.size > 0);
+          }, { threshold: 0.06 });
+          var requestSection = document.getElementById("request");
+          if (requestSection) barObserver.observe(requestSection);
+          var footerEl = document.querySelector("footer");
+          if (footerEl) barObserver.observe(footerEl);
+        }
+
+        document.getElementById("copyBtn").addEventListener("click", function () {
+          if (!currentMessage) return;
+          function done() { /* request copied to clipboard */ }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(currentMessage).then(done, function () { fallback(); });
+          } else {
+            fallback();
+          }
+          function fallback() {
+            var ta = document.createElement("textarea");
+            ta.value = currentMessage;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand("copy"); done(); } catch (err) { /* preview remains visible for manual copy */ }
+            document.body.removeChild(ta);
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
