@@ -369,9 +369,40 @@
         .mobile-cta .btn { font-size: 14px; }
       }
       @media (prefers-reduced-motion: reduce) { .mobile-cta { transition: none; } }
+
+      /* ---------- Interactive upgrade (Relay-style) ---------- */
+      #aurora { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+      main, footer { position: relative; z-index: 1; }
+      .hero-tag .dot { animation: tagPulse 2.2s ease-in-out infinite; }
+      @keyframes tagPulse { 0%, 100% { box-shadow: 0 0 0 3px rgba(46, 229, 111, 0.22); } 50% { box-shadow: 0 0 0 7px rgba(46, 229, 111, 0.05); } }
+
+      .stats-strip { border-bottom: 1px solid var(--line-soft); background: rgba(10, 15, 12, 0.55); }
+      .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding: 34px 0; }
+      .stat { text-align: center; }
+      .stat b { display: block; font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 4.6vw, 52px); line-height: 1; color: var(--text); letter-spacing: -0.01em; }
+      .stat b .plus { color: var(--green); }
+      .stat > span { display: block; margin-top: 9px; font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-2); }
+      @media (max-width: 560px) { .stats { gap: 10px; padding: 26px 0; } .stat > span { font-size: 10px; letter-spacing: 0.08em; } }
+
+      .rv { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+      .rv.in { opacity: 1; transform: none; }
+      @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } .hero-tag .dot { animation: none; } }
+
+      .svc { position: relative; overflow: hidden; transition: border-color 0.2s ease, transform 0.2s ease; }
+      .svc::after { content: ""; position: absolute; inset: 0; border-radius: inherit; opacity: 0; transition: opacity 0.25s ease; background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), rgba(46, 229, 111, 0.13), transparent 65%); pointer-events: none; }
+      .svc:hover { transform: translateY(-3px); }
+      .svc:hover::after { opacity: 1; }
+
+      @media (min-width: 921px) {
+        .steps { position: relative; }
+        .steps::before { content: ""; position: absolute; top: 41px; left: 14px; right: 14px; height: 2px; z-index: 0; background: linear-gradient(90deg, transparent, rgba(46, 229, 111, 0.55) 12%, rgba(46, 229, 111, 0.55) 88%, transparent); }
+        .step { z-index: 1; }
+      }
+      .step-num { box-shadow: 0 0 16px rgba(46, 229, 111, 0.35); }
     </style>
   </head>
   <body>
+    <canvas id="aurora" aria-hidden="true"></canvas>
     <header>
       <div class="wrap nav">
         <a class="brand" href="#top" aria-label="David — Web Designer, home">
@@ -415,6 +446,15 @@
             </ul>
           </div>
 
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-strip">
+        <div class="wrap stats">
+          <div class="stat"><b><span class="count" data-to="6">0</span><span class="plus">+</span></b><span>Website services</span></div>
+          <div class="stat"><b><span class="count" data-to="4">0</span></b><span>Simple steps</span></div>
+          <div class="stat"><b><span class="count" data-to="100">0</span><span class="plus">%</span></b><span>Demo before payment</span></div>
         </div>
       </div>
 
@@ -863,6 +903,104 @@
             document.body.removeChild(ta);
           }
         });
+      })();
+    </script>
+    <script>
+      (function () {
+        var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        /* Aurora glow: soft lime/teal/blue light that drifts on its own
+           and leans toward the visitor's pointer, Relay-style. */
+        var canvas = document.getElementById("aurora");
+        if (canvas && !reduceMotion) {
+          var ctx = canvas.getContext("2d");
+          var W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+          function sizeCanvas() {
+            W = window.innerWidth; H = window.innerHeight;
+            canvas.width = Math.floor(W * DPR); canvas.height = Math.floor(H * DPR);
+            ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+          }
+          sizeCanvas();
+          window.addEventListener("resize", sizeCanvas);
+          var pointer = { x: -9999, y: -9999 };
+          window.addEventListener("pointermove", function (e) { pointer.x = e.clientX; pointer.y = e.clientY; }, { passive: true });
+          var blobs = [
+            { hue: "46,229,111", r: 340, bx: 0.22, by: 0.28, sp: 0.00021, ph: 0.0, pull: 0.35 },
+            { hue: "45,212,191", r: 300, bx: 0.78, by: 0.18, sp: 0.00016, ph: 2.1, pull: 0.22 },
+            { hue: "87,255,150", r: 260, bx: 0.62, by: 0.78, sp: 0.00026, ph: 4.2, pull: 0.28 },
+            { hue: "59,130,246", r: 300, bx: 0.12, by: 0.82, sp: 0.00013, ph: 1.2, pull: 0.15 }
+          ];
+          blobs.forEach(function (b) { b.x = b.bx * window.innerWidth; b.y = b.by * window.innerHeight; });
+          var running = true;
+          document.addEventListener("visibilitychange", function () {
+            var was = running;
+            running = !document.hidden;
+            if (running && !was) requestAnimationFrame(frame);
+          });
+          function frame(t) {
+            if (!running) return;
+            ctx.clearRect(0, 0, W, H);
+            ctx.globalCompositeOperation = "lighter";
+            blobs.forEach(function (b) {
+              var tx = (b.bx + Math.sin(t * b.sp + b.ph) * 0.09) * W;
+              var ty = (b.by + Math.cos(t * b.sp * 0.9 + b.ph) * 0.09) * H;
+              if (pointer.x > -1000) { tx += (pointer.x - tx) * b.pull * 0.35; ty += (pointer.y - ty) * b.pull * 0.35; }
+              b.x += (tx - b.x) * 0.045; b.y += (ty - b.y) * 0.045;
+              var g = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
+              g.addColorStop(0, "rgba(" + b.hue + ",0.13)");
+              g.addColorStop(1, "rgba(" + b.hue + ",0)");
+              ctx.fillStyle = g;
+              ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, 6.2832); ctx.fill();
+            });
+            ctx.globalCompositeOperation = "source-over";
+            requestAnimationFrame(frame);
+          }
+          requestAnimationFrame(frame);
+        }
+
+        /* Scroll reveal + animated counters */
+        function countUp(el) {
+          var to = parseInt(el.getAttribute("data-to"), 10) || 0;
+          if (reduceMotion) { el.textContent = String(to); return; }
+          var start = null;
+          function tick(ts) {
+            if (!start) start = ts;
+            var p = Math.min((ts - start) / 1100, 1);
+            el.textContent = String(Math.round(to * (1 - Math.pow(1 - p, 3))));
+            if (p < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        }
+        var revealEls = document.querySelectorAll(".sec-head, .svc, .step, .who, .stat, .request-shell, details");
+        if ("IntersectionObserver" in window && !reduceMotion) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              var el = entry.target;
+              el.classList.add("in");
+              el.querySelectorAll(".count").forEach(countUp);
+              io.unobserve(el);
+            });
+          }, { threshold: 0.15 });
+          revealEls.forEach(function (el, i) {
+            el.classList.add("rv");
+            el.style.transitionDelay = (i % 4) * 60 + "ms";
+            io.observe(el);
+          });
+        } else {
+          document.querySelectorAll(".count").forEach(countUp);
+        }
+
+        /* Service cards: highlight follows the cursor */
+        if (window.matchMedia && window.matchMedia("(pointer: fine)").matches) {
+          document.querySelectorAll(".svc").forEach(function (card) {
+            card.addEventListener("pointermove", function (e) {
+              var r = card.getBoundingClientRect();
+              card.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100) + "%");
+              card.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100) + "%");
+            });
+          });
+        }
       })();
     </script>
   </body>
